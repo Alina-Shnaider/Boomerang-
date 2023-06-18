@@ -10,6 +10,5 @@ const game = new Game({
 
 // Запуск игры.
 game.play();
-//a
-runInteractiveConsole(game);
 
+runInteractiveConsole(game);
