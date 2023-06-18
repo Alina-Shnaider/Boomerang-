@@ -8,12 +8,6 @@ class Boomerang {
     this.position = undefined; // оставить так, бумеранг не будет видно в начале
     this.newPosition = undefined;
     this.trackLength = trackLength;
-    this.generateSkin();
-  }
-
-  generateSkin() {
-    const skins = ['🦭'];
-    this.skin = skins[Math.floor(Math.random() * skins.length)];
   }
 
   fly() {

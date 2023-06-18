@@ -58,11 +58,8 @@ class Game {
     }
   }
 
-  // check() {}
-
   play() {
     setInterval(() => {
-      // Let's play!
       this.handleCollisions();
       this.regenerateTrack();
 
@@ -72,7 +69,6 @@ class Game {
 
       // Если враг достиг края трека, перемещаем его в начало
       if (this.enemy.position < 0) {
-        // this.enemy.position = this.trackLength - 1;
         this.enemy = new Enemy(this.trackLength);
       }
       if (this.enemy2.newPosition < 0) {
@@ -90,11 +86,6 @@ class Game {
       defaults: { score: this.hero.scores },
       logging: false,
     });
-    // const user = await User.findOne({
-    //   where: { name: this.hero.name },
-    //   logging: false,
-    // });
-    // если очки в БД меньше очков текущего боя - запиши текущие очки в лучший результат и перепиши в БД
     if (user[0].score <= this.hero.scores) {
       this.hero.bigscore = this.hero.scores;
       await User.update(
@@ -102,7 +93,6 @@ class Game {
         { where: { name: this.hero.name } },
         { logging: false }
       );
-      // this.hero.bigscore = user[0].score;
     } else {
       this.hero.bigscore = user[0].score;
       await User.update(
@@ -114,15 +104,11 @@ class Game {
   }
 
   async handleCollisions() {
-    // враг сталкивается с Героем, и жизни героя уменьшаются
     if (
       (this.hero.position >= this.enemy.position && this.hero.position - this.enemy.position < 2) ||
       (this.hero.newPosition >= this.enemy2.newPosition &&
         this.hero.newPosition - this.enemy2.newPosition < 2)
     ) {
-      // this.regenerateTrack();
-      // this.hero.position = 0;
-      // this.hero.newPisition = undefined;
       this.hero.lifesCount -= 1;
 
       if (this.hero.lifesCount === 2) {
@@ -147,7 +133,7 @@ class Game {
       // player.play('./src/sounds/death.wav');
       this.enemy.die();
       this.hero.scores += 1;
-      // Обнуляем позицию бумеранга после столкновения с врагом
+      // обнуляем позиции врага
       this.boomerang.position = undefined;
       this.enemy = new Enemy(this.trackLength); // Создаем нового врага
     }
@@ -156,9 +142,8 @@ class Game {
       // player.play('./src/sounds/death.wav');
       this.enemy2.die();
       this.hero.scores += 1;
-      // Обнуляем позицию бумеранга после столкновения с врагом
       this.boomerang.newPosition = undefined;
-      this.enemy2 = new Enemy(this.trackLength); // Создаем нового врага
+      this.enemy2 = new Enemy(this.trackLength);
     }
   }
 }
