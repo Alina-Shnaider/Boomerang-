@@ -31,7 +31,12 @@ class Game {
   regenerateTrack() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
+
+    this.track = new Array(this.trackLength).fill('_');
+    this.track[this.hero.position] = this.hero.skin;
+
     this.track = new Array(this.trackLength).fill(' ');
+
     this.track[this.enemy.position] = this.enemy.skin; // Добавьте эту строку
 
     if (this.hero.position >= 0) {
