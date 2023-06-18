@@ -11,11 +11,8 @@ const game = new Game({
 // Запуск игры.
 game.play();
 
-
 runInteractiveConsole(game);
 
 //  ff
-=======
 
 runInteractiveConsole(game);
-

@@ -1,12 +1,12 @@
 // const readlineSync = require('readline-sync');
-const player = require('play-sound');
-
+// const player = require('play-sound');
+const readlineSync = require('readline-sync');
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
 const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
 
-// const { User } = require('../db/models');
+const { User } = require('../models');
 
 // Основной класс игры.
 
@@ -64,6 +64,13 @@ class Game {
   }
 
   play() {
+    // во время запуска игры выводится форма регистрации и присваивается имя игрока
+    this.hero.name = readlineSync.question('Приветствуем Героя!\nВведи своё имя: ');
+    process.stdin.resume();
+    if (!this.hero.name) {
+      this.hero.name = 'Anonimus';
+    }
+
     setInterval(() => {
       this.handleCollisions();
       this.regenerateTrack();
