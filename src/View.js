@@ -17,7 +17,7 @@ class View {
     );
 
     if (this.game.hero.lifesCount === 0) {
-      await this.game.dieHero();
+      // await this.game.dieHero();
 
       console.log(`\nТвой текущий лучший результат: ${this.game.hero.bigscore}\n`);
     }
