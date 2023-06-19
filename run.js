@@ -13,3 +13,6 @@ game.play();
 
 runInteractiveConsole(game);
 
+//  ff
+
+runInteractiveConsole(game);
