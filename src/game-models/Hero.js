@@ -67,7 +67,7 @@ class Hero {
 
   die() {
     this.skin = '🍖';
-    console.log('YOU ARE DEAD!🥘\n');
+    console.log('MISHA DAVAI PO NOVOI!🥘\n');
     process.exit();
   }
 }
