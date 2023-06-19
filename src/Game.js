@@ -1,5 +1,5 @@
 // const readlineSync = require('readline-sync');
-// const player = require('play-sound');
+const player = require('play-sound')((opts = {}));
 const readlineSync = require('readline-sync');
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
@@ -98,21 +98,22 @@ class Game {
       defaults: { score: this.hero.scores },
       logging: false,
     });
-    if (user[0].score <= this.hero.scores) {
-      this.hero.bigscore = this.hero.scores;
-      await User.update(
-        { score: this.hero.scores },
-        { where: { name: this.hero.name } },
-        { logging: false }
-      );
-    } else {
-      this.hero.bigscore = user[0].score;
-      await User.update(
-        { score: this.hero.bigscore },
-        { where: { name: this.hero.name } },
-        { logging: false }
-      );
-    }
+    // if (user[0].score <= this.hero.scores) {
+    //   this.hero.bigscore = this.hero.scores;
+    //   await User.update(
+    //     { score: this.hero.scores },
+    //     { where: { name: this.hero.name } },
+    //     { logging: false }
+    //   );
+    // }
+    // else {
+    //   this.hero.bigscore = user[0].score;
+    //   await User.update(
+    //     { score: this.hero.bigscore },
+    //     { where: { name: this.hero.name } },
+    //     { logging: false }
+    //   );
+    // }
   }
 
   async handleCollisions() {
@@ -125,25 +126,25 @@ class Game {
 
       if (this.hero.lifesCount === 2) {
         this.hero.lifes = 'Жизни: 💙💙🗿';
-        // player.play('./src/sounds/hit.wav');
-        // this.enemy.position = 27;
+        player.play('./src/sounds/death.mp3');
+        this.enemy.position = 27;
       }
       if (this.hero.lifesCount === 1) {
         this.hero.lifes = 'Жизни: 💙🗿🗿';
-        // player.play('./src/sounds/hit.wav');
-        // this.enemy.position = 25;
+
+        this.enemy.position = 25;
       }
       if (this.hero.lifesCount === 0) {
         this.hero.lifes = 'Жизни: 🗿🗿🗿';
-        // player.play('./src/sounds/death.wav');
+        player.play('./src/sounds/death.mp3');
         await this.dieHero();
         this.hero.die();
       }
     }
     // бумеранг сталкивается с врагом
     if (this.boomerang.position >= this.enemy.position) {
-      // player.play('./src/sounds/death.wav');
       this.enemy.die();
+      player.play('./src/sounds/brue.mp3');
       this.hero.scores += 1;
       // обнуляем позиции врага
       this.boomerang.position = undefined;
@@ -151,7 +152,7 @@ class Game {
     }
 
     if (this.boomerang.newPosition >= this.enemy2.newPosition) {
-      // player.play('./src/sounds/death.wav');
+      player.play('./src/sounds/brue.mp3');
       this.enemy2.die();
       this.hero.scores += 1;
       this.boomerang.newPosition = undefined;
